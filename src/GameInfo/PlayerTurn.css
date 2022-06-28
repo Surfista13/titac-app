@@ -1,0 +1,9 @@
+.turnPlayer {
+    border: 1px solid black;
+    width: 100px;
+    margin: 0px;
+    text-align: center;
+}
+.turn {
+    font-weight: bold;
+}

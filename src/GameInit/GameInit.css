@@ -1,0 +1,18 @@
+.buttonStart {
+    height: 80px;
+    width: 80px;
+    border-radius: 50%;
+    background-color: brown;
+    border: 0.5px solid black;
+    font-size: medium;
+    font-weight: bold;
+    cursor: pointer;
+    color: whitesmoke;
+
+}
+
+.buttonStart:hover {
+    background-color: rgb(221, 153, 153); 
+    border: none;
+    color: black;
+}

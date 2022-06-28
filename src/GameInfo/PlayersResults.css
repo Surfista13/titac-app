@@ -1,0 +1,9 @@
+.resultsPlayer {
+    border: 1px solid black;
+    width: 100px;
+    margin: 0px;
+    text-align: center;
+}
+.results {
+    font-weight: bold;
+}
