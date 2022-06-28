@@ -3,3 +3,6 @@
   justify-content: flex-start;
   align-items: center;
 }
+.gameBoard {
+  height: 600px;
+}

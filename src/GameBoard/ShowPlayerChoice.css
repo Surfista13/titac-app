@@ -1,0 +1,11 @@
+td {
+    border: 1px solid black;
+    width: 150px;
+    height: 150px;
+    text-align: center;
+    font-size: 100px;
+    cursor: pointer;
+}
+table {
+    padding-top: 60px;
+}
