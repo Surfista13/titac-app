@@ -11,14 +11,14 @@ class App extends React.Component {
         <div >
           <div className='container'>
               <div>
-                <GameInit />
+                <GameInit game={this.props.game}/>
               </div>
               <div>
-                <GameInfo />
+                <GameInfo game={this.props.game}/>
               </div>
           </div>
           <div className='gameBoard'>
-              <GameBoard />  
+              <GameBoard game={this.props.game}/>  
           </div>
                   
         </div>

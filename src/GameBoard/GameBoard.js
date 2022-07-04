@@ -5,7 +5,7 @@ class GameBoard extends React.Component {
     render() {
         return (
             <div>
-                <ShowPlayerChoice />
+                <ShowPlayerChoice game={this.props.game}/> {/* descente de l'objet GAME*/}
             </div>
         )
     }

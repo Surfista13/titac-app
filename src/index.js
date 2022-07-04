@@ -3,14 +3,18 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 
+const GAME = 
+  {
+    players: [{name:1, attribution:"X",isWinner:false, isTurn:false},{name:1, attribution:"O",isWinner:false, isTurn:false}],
+    table: ["X","X","X","X","X","X","X","X","X"] //contenu case du jeu de 1 à 9 (sens de lecture)
+  }
+
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <App />
+    <App game={GAME}/>  {/* descente de l'objet GAME*/}
   </React.StrictMode>
 );
 
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
+
 

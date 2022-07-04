@@ -1,27 +1,41 @@
 import React from 'react';
 import './ShowPlayerChoice.css';
-import PlayerChoice from './PlayerChoice';
 
 class ShowPlayerChoice extends React.Component {
     render() {
+        const gameBoard = this.props.game;
+        const c1 = gameBoard.table[0];
+        const c2 = gameBoard.table[1];
+        const c3 = gameBoard.table[2];
+        const c4 = gameBoard.table[3];
+        const c5 = gameBoard.table[4];
+        const c6 = gameBoard.table[5];
+        const c7 = gameBoard.table[6];
+        const c8 = gameBoard.table[7];
+        const c9 = gameBoard.table[8];
+
+        
         return (
             <div className='container'>
                 <table>
-                    <tr>
-                        <td>1</td>
-                        <td>2</td>
-                        <td>3</td>
-                    </tr>
-                    <tr>
-                        <td>4</td>
-                        <td>5</td>
-                        <td>6</td>
-                    </tr>
-                    <tr>
-                        <td>7</td>
-                        <td>8</td>
-                        <td>9</td>
-                    </tr>
+                    <tbody>
+                        <tr>
+                            <td>{c1}</td>
+                            <td>{c2}</td>
+                            <td>{c3}</td>
+                        </tr>
+                        <tr>
+                            <td>{c4}</td>
+                            <td>{c5}</td>
+                            <td>{c6}</td>
+                        </tr>
+                        <tr>
+                            <td>{c7}</td>
+                            <td>{c8}</td>
+                            <td>{c9}</td>
+                        </tr>  
+                    </tbody>
+
                 </table>
             </div>
         )

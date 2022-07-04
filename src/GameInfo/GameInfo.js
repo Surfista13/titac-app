@@ -10,11 +10,11 @@ class GameInfo extends React.Component {
         return (
             <div className='container'>
                 <div className='playerTurnAndResults'>
-                    <PlayerTurn />  
-                    <PlayersResults />
+                    <PlayerTurn game={this.props.game}/>  {/* descente de l'objet GAME*/}
+                    <PlayersResults game={this.props.game}/> {/* descente de l'objet GAME*/}
                 </div>                        
                 <div className='playerAttribution'>
-                   <PlayerAttribution />   
+                   <PlayerAttribution game={this.props.game}/> {/* descente de l'objet GAME*/}   
                 </div> 
             </div>
         )
