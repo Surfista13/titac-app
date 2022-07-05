@@ -2,17 +2,26 @@ import React from 'react';
 import './ShowPlayerChoice.css';
 
 class ShowPlayerChoice extends React.Component {
+    constructor(props) {
+        super(props);
+        this.handleCaseClick = this.handleCaseClick.bind(this);
+    };
+
+    handleCaseClick(e) {
+        this.props.handleChoice(e.target.className);
+    }
+    
     render() {
         const gameBoard = this.props.game;
-        const c1 = gameBoard.table[0];
-        const c2 = gameBoard.table[1];
-        const c3 = gameBoard.table[2];
-        const c4 = gameBoard.table[3];
-        const c5 = gameBoard.table[4];
-        const c6 = gameBoard.table[5];
-        const c7 = gameBoard.table[6];
-        const c8 = gameBoard.table[7];
-        const c9 = gameBoard.table[8];
+        const c0 = this.props.choice[0];
+        const c1 = this.props.choice[1];
+        const c2 = this.props.choice[2];
+        const c3 = this.props.choice[3];
+        const c4 = this.props.choice[4];
+        const c5 = this.props.choice[5];
+        const c6 = this.props.choice[6];
+        const c7 = this.props.choice[7];
+        const c8 = this.props.choice[8];
 
         
         return (
@@ -20,19 +29,19 @@ class ShowPlayerChoice extends React.Component {
                 <table>
                     <tbody>
                         <tr>
-                            <td>{c1}</td>
-                            <td>{c2}</td>
-                            <td>{c3}</td>
+                            <td className='0' onClick={this.handleCaseClick}>{c0}</td>
+                            <td className='1'onClick={this.handleCaseClick}>{c1}</td>
+                            <td className='2' onClick={this.handleCaseClick}>{c2}</td>
                         </tr>
                         <tr>
-                            <td>{c4}</td>
-                            <td>{c5}</td>
-                            <td>{c6}</td>
+                            <td className='3' onClick={this.handleCaseClick}>{c3}</td>
+                            <td className='4' onClick={this.handleCaseClick}>{c4}</td>
+                            <td className='5' onClick={this.handleCaseClick}>{c5}</td>
                         </tr>
                         <tr>
-                            <td>{c7}</td>
-                            <td>{c8}</td>
-                            <td>{c9}</td>
+                            <td className='6' onClick={this.handleCaseClick}>{c6}</td>
+                            <td className='7' onClick={this.handleCaseClick}>{c7}</td>
+                            <td className='8' onClick={this.handleCaseClick}>{c8}</td>
                         </tr>  
                     </tbody>
 
