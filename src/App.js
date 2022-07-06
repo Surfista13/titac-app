@@ -6,7 +6,7 @@ import GameBoard from './GameBoard/GameBoard';
 
 const players= 
   {
-    players: [{name:1, attribution:"X",isWinner:false, isTurn:true},{name:1, attribution:"O",isWinner:false, isTurn:false}],
+    players: [{name:1, attribution:"X",isWinner:false, isTurn:true, isDraw:false},{name:2, attribution:"O",isWinner:false, isTurn:false, isDraw:false}],
     table: ["","","","","","","","",""] //supprimer et utiliser un etat
   };
 
@@ -14,10 +14,12 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      playerCaseChoice:players.table
+      playerCaseChoice:players.table,
+      isInit:false
     };
     this.handlePlayerCaseChoice = this.handlePlayerCaseChoice.bind(this);
     this.handlePlayersTurn = this.handlePlayersTurn.bind(this);
+    this.handleStart = this.handleStart.bind(this);
   };
 
   // handle player turn method
@@ -34,24 +36,23 @@ class App extends React.Component {
 
   // handle click player on case of the board - method
   handlePlayerCaseChoice (playerCaseChoice) {
-    const handlePlayerChoices = players;
-    
-    const turn = players.players[0].isTurn;
-    
-    turn ? handlePlayerChoices.table[playerCaseChoice] = handlePlayerChoices.players[0].attribution : handlePlayerChoices.table[playerCaseChoice] = handlePlayerChoices.players[1].attribution;
-
-    const choice = handlePlayerChoices.table;
-    
-    if (players.players[0].isWinner === true || players.players[1].isWinner === true) {
+    if (players.players[0].isWinner || players.players[1].isWinner) {
       return
     }
+    const handlePlayerChoices = players;
+    const turn = players.players[0].isTurn;
+    if (handlePlayerChoices.table[playerCaseChoice] !== "") {
+      return
+    }
+    turn ? handlePlayerChoices.table[playerCaseChoice] = handlePlayerChoices.players[0].attribution : handlePlayerChoices.table[playerCaseChoice] = handlePlayerChoices.players[1].attribution;
+    const choice = handlePlayerChoices.table;
     this.setState({
       playerCaseChoice:choice
     })
     this.handleWinner ();
-    
     this.handlePlayersTurn ();   
   }
+
 
   // handle winner method
   handleWinner () {
@@ -64,24 +65,85 @@ class App extends React.Component {
     
     let idx = players.table.indexOf(currentPlayerAttribution);
 
-    while (idx != -1) {
+    while (idx !== -1) {   //calcul à chaque tour pour un joueur d'un array des index de ses choix
       indices.push(idx);
       idx = players.table.indexOf(currentPlayerAttribution, idx + 1);
     }
-    for (let i=0 ; i < winningCombinaisons.length ; i++) {
-      if (JSON.stringify(winningCombinaisons[i]) == JSON.stringify(indices)) {
-        players.players[0].isTurn ? players.players[0].isWinner = true :  players.players[1].isWinner = true;       
+    let combinaison = new Array();   
+    for (let i = 0; i <= winningCombinaisons.length-1; i++) {
+      for (let j = 0; j <= indices.length-1; j++) {
+        for (let k = 0; k <= winningCombinaisons[i].length-1; k++) {                             
+            if (winningCombinaisons[i][k] === indices[j]) {
+            combinaison.push(indices[j]) 
+            }       
+        }        
+      } 
+      if (combinaison.length === 3) {
+        players.players[0].isTurn ? players.players[0].isWinner = true :  players.players[1].isWinner = true;
+        return
+          } 
+      else {
+        combinaison = [];
+      }     
+    }
+    //const turnLeft = this.state.playerCaseChoice.filter(x => x.length==0); GESTION DU DRAW ??
+
+  };
+
+  // attribution player signe method
+  handleAttribution() {
+    const playerOnePosition = Math.random();
+    const playerTwoPosition = Math.random();
+
+    if (playerOnePosition >= playerTwoPosition) {
+      players.players[0].attribution = "X";
+      players.players[1].attribution = "O";
+    } else {
+      players.players[0].attribution = "O";
+      players.players[1].attribution = "X";
+    }  
+  }
+
+    // turn player method
+    handleTurn() {
+      const playerOneTurn = Math.random();
+      const playerTwoTurn = Math.random();
+  
+      if (playerOneTurn >= playerTwoTurn) {
+        players.players[0].isTurn = true;
+        players.players[1].isTurn = false;
+      } else {
+        players.players[0].isTurn = false;
+        players.players[1].isTurn = true;
       }
     }
 
+  // initialisation method
+  handleInitialisation() {
+    this.setState({
+      playerCaseChoice:["","","","","","","","",""]
+    })
+    players.table = ["","","","","","","","",""];
+    players.players[0].isWinner = false;
+    players.players[1].isWinner = false;
   }
-  
+
+  // start method
+  handleStart() {
+    this.handleInitialisation();
+    this.handleAttribution();
+    this.handleTurn();
+    this.setState({
+      isInit:false
+    })
+  }
+
   render() {
       return (
         <div >
           <div className='container'>
               <div>
-                <GameInit game={players}/>
+                <GameInit start={this.handleStart}/>
               </div>
               <div>
                 <GameInfo game={players}/>

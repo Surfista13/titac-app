@@ -12,7 +12,6 @@ class ShowPlayerChoice extends React.Component {
     }
     
     render() {
-        const gameBoard = this.props.game;
         const c0 = this.props.choice[0];
         const c1 = this.props.choice[1];
         const c2 = this.props.choice[2];
